@@ -33,26 +33,22 @@ function playRound(computerChoice, playerInput) {
     console.log(`You chose ${playerChoice}.`);
     console.log(`The computer chose ${computerChoice}.`);
 
-    if (computerChoice === playerChoice) {
-        return "Tie!";
-    } else {
-        switch (computerChoice) {
-            case "rock":
-                if (playerChoice === "paper") {
-                    return "You won!";
-                } else return "You lost!";
-                
-            case "paper":
-                if (playerChoice === "scissors") {
-                    return "You won!";
-                } else return "You lost!";
-
-            case "scissors":
-                if (playerChoice === "rock") {
-                    return "You won!";
-                } else return "You lost!";
+    switch (computerChoice) {
+        case (playerChoice):
+             return "Tie!";
+        case "rock":
+            if (playerChoice === "paper") {
+                return "You won!";
+            } else return "You lost!";      
+        case "paper":
+            if (playerChoice === "scissors") {
+                return "You won!";
+            } else return "You lost!";
+        case "scissors":
+            if (playerChoice === "rock") {
+                return "You won!";
+            } else return "You lost!";
         }
-    }
 }
 
 function getComputerChoice() {
