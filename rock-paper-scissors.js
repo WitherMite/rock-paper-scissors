@@ -2,12 +2,14 @@ const INPUTBTNS = document.querySelectorAll(".inputButton");
 const PLAYERSCORE = document.querySelector(".pScore");
 const CPUSCORE = document.querySelector(".cScore");
 const RESULT = document.querySelector(".result");
+const PLAYERCHOICE = document.querySelector(".pChoice");
+const CPUCHOICE = document.querySelector(".cChoice");
 
 INPUTBTNS.forEach((button) => {
     button.addEventListener("click", function() {
-        const playerInput = button.innerText;
+        const playerChoice = button.innerText;
         RESULT.innerText = "";
-        calcScore(playRound(getComputerChoice(), playerInput));
+        calcScore(playRound(getComputerChoice(), playerChoice));
     });
 });
 
@@ -34,24 +36,23 @@ function calcScore(roundResult) {
     CPUSCORE.innerText = cpuScore;
 }
 
-function playRound(computerChoice, playerInput) {
-    let playerChoice = playerInput.toLowerCase();
-    console.log(`You chose ${playerChoice}.`);
-    console.log(`The computer chose ${computerChoice}.`);
+function playRound(computerChoice, playerChoice) {
+    PLAYERCHOICE.innerText = playerChoice;
+    CPUCHOICE.innerText = computerChoice;
 
     switch (computerChoice) {
         case (playerChoice):
              return "Tie!";
-        case "rock":
-            if (playerChoice === "paper") {
+        case "Rock":
+            if (playerChoice === "Paper") {
                 return "You won!";
             } else return "You lost!";      
-        case "paper":
-            if (playerChoice === "scissors") {
+        case "Paper":
+            if (playerChoice === "Scissors") {
                 return "You won!";
             } else return "You lost!";
-        case "scissors":
-            if (playerChoice === "rock") {
+        case "Scissors":
+            if (playerChoice === "Rock") {
                 return "You won!";
             } else return "You lost!";
         }
@@ -61,10 +62,10 @@ function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3);
 
     if (choice === 0) {
-        return "rock";
+        return "Rock";
     } else if (choice === 1) {
-        return "paper";
+        return "Paper";
     } else {
-        return "scissors";
+        return "Scissors";
     }
 }
