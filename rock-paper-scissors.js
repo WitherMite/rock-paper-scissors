@@ -1,32 +1,11 @@
-game();
+const INPUTBTNS = document.querySelectorAll(".inputButton");
 
-function game() {
-    let playerScore = 0;
-    let cpuScore = 0;
-
-    for (let i=0; i<5; i++) {
-        let playerInput = prompt("Rock, Paper, or Scissors?");
-
-        let round = playRound(getComputerChoice(), playerInput);
-        console.log(round);
-
-        if (round.charAt(4) === "w") {
-            playerScore += 1;
-        } else if (round.charAt(4) === "l") {
-            cpuScore += 1;
-        }
-            
-        console.log(`Your score is ${playerScore} to ${cpuScore}`);
-    }
-
-    if (playerScore === cpuScore) {
-        console.log(`Game tied ${playerScore} to ${cpuScore}`);
-    } else if (cpuScore < playerScore) {
-        console.log(`You won ${playerScore} to ${cpuScore}`);
-    } else {
-        console.log(`You lost ${playerScore} to ${cpuScore}`);
-    }
-}
+INPUTBTNS.forEach((button) => {
+    button.addEventListener("click", function() {
+        const playerInput = button.innerText;
+        return console.log(playRound(getComputerChoice(), playerInput));
+    });
+});
 
 function playRound(computerChoice, playerInput) {
     let playerChoice = playerInput.toLowerCase();
@@ -61,5 +40,4 @@ function getComputerChoice() {
     } else {
         return "scissors";
     }
-        
 }
