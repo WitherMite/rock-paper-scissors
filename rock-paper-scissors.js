@@ -1,11 +1,38 @@
 const INPUTBTNS = document.querySelectorAll(".inputButton");
+const PLAYERSCORE = document.querySelector(".pScore");
+const CPUSCORE = document.querySelector(".cScore");
+const RESULT = document.querySelector(".result");
 
 INPUTBTNS.forEach((button) => {
     button.addEventListener("click", function() {
         const playerInput = button.innerText;
-        return console.log(playRound(getComputerChoice(), playerInput));
+        RESULT.innerText = "";
+        calcScore(playRound(getComputerChoice(), playerInput));
     });
 });
+
+function calcScore(roundResult) {
+    let playerScore = Number(PLAYERSCORE.innerText);
+    let cpuScore = Number(CPUSCORE.innerText);
+
+    if (roundResult === "You won!") {
+        playerScore += 1;
+        if (playerScore === 5) {
+            RESULT.innerText = "Player Wins!";
+            playerScore = 0;
+            cpuScore = 0;
+        }
+    } else if (roundResult === "You lost!") {
+        cpuScore += 1;
+        if (cpuScore === 5) {
+            RESULT.innerText = "Computer Wins!"
+            playerScore = 0;
+            cpuScore = 0;
+        }
+    }
+    PLAYERSCORE.innerText = playerScore;
+    CPUSCORE.innerText = cpuScore;
+}
 
 function playRound(computerChoice, playerInput) {
     let playerChoice = playerInput.toLowerCase();
