@@ -6,10 +6,10 @@ const PLAYERCHOICE = document.querySelector(".pChoice");
 const CPUCHOICE = document.querySelector(".cChoice");
 
 INPUTBTNS.forEach((button) => {
-    button.addEventListener("click", function() {
+    button.addEventListener("click", () => {
         const playerChoice = button.innerText;
         RESULT.innerText = "";
-        calcScore(playRound(getComputerChoice(), playerChoice));
+        calcScore(getRoundResult(getComputerChoice(), playerChoice));
     });
 });
 
@@ -17,17 +17,17 @@ function calcScore(roundResult) {
     let playerScore = Number(PLAYERSCORE.innerText);
     let cpuScore = Number(CPUSCORE.innerText);
 
-    if (roundResult === "You won!") {
+    if (roundResult === "player") {
         playerScore += 1;
         if (playerScore === 5) {
-            RESULT.innerText = "Player Wins!";
+            RESULT.innerText = `Player Wins 5-${cpuScore}!`;
             playerScore = 0;
             cpuScore = 0;
         }
-    } else if (roundResult === "You lost!") {
+    } else if (roundResult === "computer") {
         cpuScore += 1;
         if (cpuScore === 5) {
-            RESULT.innerText = "Computer Wins!"
+            RESULT.innerText = `Computer Wins 5-${playerScore}!`
             playerScore = 0;
             cpuScore = 0;
         }
@@ -36,25 +36,25 @@ function calcScore(roundResult) {
     CPUSCORE.innerText = cpuScore;
 }
 
-function playRound(computerChoice, playerChoice) {
+function getRoundResult(computerChoice, playerChoice) {
     PLAYERCHOICE.innerText = playerChoice;
     CPUCHOICE.innerText = computerChoice;
 
     switch (computerChoice) {
         case (playerChoice):
-             return "Tie!";
+             return "tie";
         case "Rock":
             if (playerChoice === "Paper") {
-                return "You won!";
-            } else return "You lost!";      
+                return "player";
+            } else return "computer";      
         case "Paper":
             if (playerChoice === "Scissors") {
-                return "You won!";
-            } else return "You lost!";
+                return "player";
+            } else return "computer";
         case "Scissors":
             if (playerChoice === "Rock") {
-                return "You won!";
-            } else return "You lost!";
+                return "player";
+            } else return "computer";
         }
 }
 
